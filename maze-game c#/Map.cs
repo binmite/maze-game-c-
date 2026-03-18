@@ -74,5 +74,34 @@ namespace maze_game_c_
                 throw new ArgumentException("Неверный уровень сложности");
             }
         }
+
+        public static char[,] LoadMap(int difficulty)
+        {
+            if (difficulty == 1)
+            {
+                string[] fileContent = File.ReadAllLines(EasyMapPath);
+
+                return OneDimensionToTwoDimension(difficulty, fileContent);
+            }
+
+            else if (difficulty == 2)
+            {
+                string[] fileContent = File.ReadAllLines(MediumMapPath);
+
+                return OneDimensionToTwoDimension(difficulty, fileContent);
+            }
+
+            else if (difficulty == 3)
+            {
+                string[] fileContent = File.ReadAllLines(HardMapPath);
+
+                return OneDimensionToTwoDimension(difficulty, fileContent);
+            }
+
+            else
+            {
+                throw new ArgumentException("Неверный уровень сложности");
+            }
+        }
     }
 }

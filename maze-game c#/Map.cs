@@ -13,66 +13,65 @@ namespace maze_game_c_
         const string MediumMapPath = "medium.txt";
         const string HardMapPath = "hard.txt";
 
-        static string LoadMap(int difficulty, string filePath)
-        {
-            if (File.Exists(GetMapPath(difficulty)))
-            {
-                return File.ReadAllText(filePath);
-            }
+        public static char[,] grid;
+        public static int mapRowsEasy;
+        public static int mapColsEasy;
+        public static int mapRowsMedium;
+        public static int mapColsMedium;
+        public static int mapRowsHard;
+        public static int mapColsHard;
 
-            return "Карта не найдена.";
-        }
 
-        public static string GetMapPath(int difficulty)
+        public static char[,] OneDimensionToTwoDimension(int difficulty, string[] oneDmArray)
         {
             if (difficulty == 1)
             {
-                return EasyMapPath;
+                char[,] twoDmArray = new char[mapRowsEasy, mapColsEasy];
+
+                for (int i = 0; i < mapRowsEasy; i++)
+                {
+                    for (int j = 0; j < mapColsEasy; j++)
+                    {
+                        twoDmArray[i, j] = oneDmArray[i][j];
+                    }
+                }
+
+                return twoDmArray;
             }
 
-            else if (difficulty == 2) 
+            else if (difficulty == 2)
             {
-                return MediumMapPath;
+                char[,] twoDmArray = new char[mapRowsMedium, mapColsMedium];
+
+                for (int i = 0; i < mapRowsMedium; i++)
+                {
+                    for (int j = 0; j < mapColsMedium; j++)
+                    {
+                        twoDmArray[i, j] = oneDmArray[i][j];
+                    }
+                }
+
+                return twoDmArray;
             }
 
-            else if (difficulty == 3)
+            else if (difficulty == 3) 
             {
-                return HardMapPath;
+                char[,] twoDmArray = new char[mapRowsHard, mapColsHard];
+
+                for (int i = 0; i < mapRowsHard; i++)
+                {
+                    for (int j = 0; j < mapColsHard; j++)
+                    {
+                        twoDmArray[i, j] = oneDmArray[i][j];
+                    }
+                }
+
+                return twoDmArray;
             }
 
             else
             {
-                return null;
-            }
-        }
-
-        async public static Task MapRendering(int difficulty)
-        {
-            if (difficulty == 1)
-            {
-                using (StreamReader reader = new StreamReader(GetMapPath(difficulty)))
-                {
-                    string text = await reader.ReadToEndAsync();
-                    Console.WriteLine(text);
-                }
-            }
-
-            else if (difficulty == 2) 
-            {
-                using (StreamReader reader = new StreamReader(GetMapPath(difficulty)))
-                {
-                    string text = await reader.ReadToEndAsync();
-                    Console.WriteLine(text);
-                }
-            }
-
-            else if (difficulty == 3)
-            {
-                using (StreamReader reader = new StreamReader(GetMapPath(difficulty)))
-                {
-                    string text = await reader.ReadToEndAsync();
-                    Console.WriteLine(text);
-                }
+                throw new ArgumentException("Неверный уровень сложности");
             }
         }
     }

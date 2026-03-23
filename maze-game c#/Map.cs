@@ -13,7 +13,7 @@ namespace maze_game_c_
         const string MediumMapPath = @"maps\medium.txt";
         const string HardMapPath = @"maps\hard.txt";
 
-        public static char[,] grid;
+        public static char[,] grid; //придумать как это использовать
         public static int mapRowsEasy = 15;
         public static int mapColsEasy = 21;
         public static int mapRowsMedium = 21;
@@ -77,77 +77,50 @@ namespace maze_game_c_
 
         public static char[,] LoadMap(int difficulty)
         {
+            char[,] loadedMap;
+
             if (difficulty == 1)
             {
                 string[] fileContent = File.ReadAllLines(EasyMapPath);
 
-                return OneDimensionToTwoDimension(difficulty, fileContent);
+                loadedMap = OneDimensionToTwoDimension(difficulty, fileContent);
             }
 
             else if (difficulty == 2)
             {
                 string[] fileContent = File.ReadAllLines(MediumMapPath);
 
-                return OneDimensionToTwoDimension(difficulty, fileContent);
+                loadedMap = OneDimensionToTwoDimension(difficulty, fileContent);
             }
 
             else if (difficulty == 3)
             {
                 string[] fileContent = File.ReadAllLines(HardMapPath);
 
-                return OneDimensionToTwoDimension(difficulty, fileContent);
+                loadedMap = OneDimensionToTwoDimension(difficulty, fileContent);
             }
 
             else
             {
                 throw new ArgumentException("Неверный уровень сложности");
             }
+
+            grid = loadedMap;
+            return loadedMap;
+
         }
 
         public static void MapRendering(int difficulty)
         {
-            char[,] map;
+            grid = LoadMap(difficulty);
 
-            if (difficulty == 1)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                map = LoadMap(difficulty);
-                for (int i = 0; i < map.GetLength(0); i++)
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    for (int j = 0; j < map.GetLength(1); j++)
-                    {
-                        Console.Write(map[i, j]);
-                    }
-
-                    Console.WriteLine();
+                    Console.Write(grid[i, j]);
                 }
-            }
-
-            else if (difficulty == 2)
-            {
-                map = LoadMap(difficulty);
-                for (int i = 0; i < map.GetLength(0); i++)
-                {
-                    for (int j = 0; j < map.GetLength(1); j++)
-                    {
-                        Console.Write(map[i, j]);
-                    }
-
-                    Console.WriteLine();
-                }
-            }
-
-            else if (difficulty == 3)
-            {
-                map = LoadMap(difficulty);
-                for (int i = 0; i < map.GetLength(0); i++)
-                {
-                    for (int j = 0; j < map.GetLength(1); j++)
-                    {
-                        Console.Write(map[i, j]);
-                    }
-
-                    Console.WriteLine();
-                }
+                Console.WriteLine();
             }
         }
     }

@@ -14,5 +14,13 @@ namespace maze_game_c_
         public int currentQuestion;
         public int answer;
         public bool isDefeated;
+
+        //public static Monster GenerateQuestion(int difficulty)
+        //{
+        //    if (difficulty == 1)
+        //    {
+
+        //    }
+        //}
     }
 }

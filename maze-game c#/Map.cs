@@ -13,7 +13,7 @@ namespace maze_game_c_
         const string MediumMapPath = @"maps\medium.txt";
         const string HardMapPath = @"maps\hard.txt";
 
-        public static char[,] grid;
+        public static char[,] Grid { get; private set; }
 
         public static string GetMapPath(int difficulty)
         {
@@ -51,7 +51,7 @@ namespace maze_game_c_
 
             char[,] loadedMap = ConvertToGrid(fileContent, rows, cols);
 
-            grid = loadedMap;
+            Grid = loadedMap;
             return loadedMap;
         }
 

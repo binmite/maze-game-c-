@@ -46,28 +46,35 @@ namespace maze_game_c_
             int newX = X + deltaX;
             int newY = Y + deltaY;
 
-            if (newX >= 0 && newX < Map.Grid.GetLength(0) && newY >= 0 && newY < Map.Grid.GetLength(1) && Map.Grid[newX, newY] == '-')
+            if (newY >= 0 && newY < Map.Grid.GetLength(0) && newX >= 0 && newX < Map.Grid.GetLength(1))
             {
-                Map.Grid[newX, newY] = '*';
-                Map.Grid[X, Y] = '-';
+                if (Map.Grid[newY, newX] == '-')
+                {
+                    Map.Grid[newY, newX] = '*';
+                    Map.Grid[Y, X] = '-';
 
-                X = newX;
-                Y = newY;
+                    X = newX;
+                    Y = newY;
+                }
+                else if (Map.Grid[newY, newX] == 'M')
+                {
+                    Map.Grid[newY, newX] = '*';
+                    Map.Grid[Y, X] = '-';
+
+                    X = newX;
+                    Y = newY;
+                    // Monster.Battle();
+                }
+                else if (Map.Grid[newY, newX] == 'E')
+                {
+                    Map.Grid[newY, newX] = '*';
+                    Map.Grid[Y, X] = '-';
+
+                    X = newX;
+                    Y = newY;
+                    // метод победы
+                }
             }
-
-            else if (newX >= 0 && newX < Map.Grid.GetLength(0) && newY >= 0 && newY < Map.Grid.GetLength(1) && Map.Grid[newX, newY] == 'M')
-            {
-                //Monster.Battle();
-                X = newX;
-                Y = newY;
-            }
-
-            else if (newX >= 0 && newX < Map.Grid.GetLength(0) && newY >= 0 && newY < Map.Grid.GetLength(1) && Map.Grid[newX, newY] == 'E')
-            {
-                //метод победы
-            }
-
-            
         }
 
 

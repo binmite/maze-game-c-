@@ -27,6 +27,14 @@ namespace maze_game_c_
             Console.WriteLine("3. Hard");
         }
 
+        public static void VictoryScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Congratulations!!!");
+            Console.WriteLine("Press any key to return to title screen...");
+            Console.ReadKey(true);
+        }
+
         public static void MoveCycle(int difficulty)
         {
             char[,] grid = Map.LoadMap(difficulty);
@@ -70,6 +78,12 @@ namespace maze_game_c_
                 }
 
                 player.Move(deltaX, deltaY);
+
+                if (player.HasWon == true)
+                {
+                    VictoryScreen();
+                    break;
+                }
             }
         }
 

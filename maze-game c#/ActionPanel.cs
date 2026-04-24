@@ -121,7 +121,7 @@ namespace maze_game_c_
 
             while (!int.TryParse(Console.ReadLine(), out choice) || choice < min || choice > max)
             {
-                Console.WriteLine($"Пожалуйста, введите число от {min} до {max}:");
+                Console.WriteLine($"Please enter a number from {min} to {max}:");
             }
 
             return choice;

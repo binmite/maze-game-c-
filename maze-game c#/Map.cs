@@ -15,6 +15,8 @@ namespace maze_game_c_
 
         public static char[,] Grid { get; private set; }
 
+        public static List<Monster> Monsters = new List<Monster>();
+
         public static string GetMapPath(int difficulty)
         {
             return difficulty switch
@@ -22,7 +24,7 @@ namespace maze_game_c_
                 1 => (EasyMapPath),
                 2 => (MediumMapPath),
                 3 => (HardMapPath),
-                _ => throw new ArgumentException("Неверный уровень сложности")
+                _ => throw new ArgumentException("Invalid difficulty level")
             };
         }
 
@@ -50,6 +52,18 @@ namespace maze_game_c_
             int cols = fileContent[0].Length;
 
             char[,] loadedMap = ConvertToGrid(fileContent, rows, cols);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (loadedMap[i, j] == 'M')
+                    {
+                        Monster monster = new Monster(j, i, difficulty);
+                        Monsters.Add(monster);
+                    }
+                }
+            }
 
             Grid = loadedMap;
             return loadedMap;

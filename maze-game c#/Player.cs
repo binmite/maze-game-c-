@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,26 +59,62 @@ namespace maze_game_c_
                 }
                 else if (Map.Grid[newY, newX] == 'M')
                 {
-                    Map.Grid[newY, newX] = '*';
-                    Map.Grid[Y, X] = '-';
+                    Monster monster = Map.Monsters.Find(m => m.X == newX && m.Y == newY);
 
-                    X = newX;
-                    Y = newY;
-                    // Monster.Battle();
+                    if (monster != null && !monster.IsDefeated)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(monster.CurrentQuestion);
+
+                        int answer;
+                        while (true)
+                        {
+                            string input = Console.ReadLine()!;
+
+                            if (int.TryParse(input, out answer))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please enter a number!");
+                            }
+                        }
+
+                        if (monster.CheckAnswer(answer))
+                        {
+                            Console.WriteLine("Victory!");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey(true);
+                            Console.Clear();
+                            Map.Monsters.Remove(monster);
+                            Map.Grid[newY, newX] = '-';
+
+                            Map.Grid[newY, newX] = '*';
+                            Map.Grid[Y, X] = '-';
+                            X = newX;
+                            Y = newY;
+                        }
+                        else
+                        {
+                            IsAlive = false;
+                            Console.WriteLine("Defeat");
+                            Console.WriteLine("Press any key to return to start...");
+                            Console.ReadKey(true);
+                        }
+                    }
                 }
                 else if (Map.Grid[newY, newX] == 'E')
                 {
+                    HasWon = true;
+
                     Map.Grid[newY, newX] = '*';
                     Map.Grid[Y, X] = '-';
 
                     X = newX;
                     Y = newY;
-                    // метод победы
                 }
             }
         }
-
-
-
     }
 }

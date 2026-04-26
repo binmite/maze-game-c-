@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace maze_game_c_
+﻿namespace maze_game_c_
 {
     internal class Map
     {
@@ -75,6 +68,36 @@ namespace maze_game_c_
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
+                    if (grid[i, j] == 'x')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    }
+
+                    else if (grid[i, j] == 'M')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+
+                    else if (grid[i, j] == '*')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
+                    else if (grid[i, j] == 'E')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
+                    else if (grid[i, j] == '@')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
+                    else if (grid[i, j] == '·')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
                     Console.Write(grid[i, j]);
                 }
                 Console.WriteLine();

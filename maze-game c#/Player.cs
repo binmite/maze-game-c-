@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace maze_game_c_
+﻿namespace maze_game_c_
 {
     internal class Player
     {
@@ -49,10 +42,10 @@ namespace maze_game_c_
 
             if (newY >= 0 && newY < Map.Grid.GetLength(0) && newX >= 0 && newX < Map.Grid.GetLength(1))
             {
-                if (Map.Grid[newY, newX] == '-')
+                if (Map.Grid[newY, newX] == '·')
                 {
                     Map.Grid[newY, newX] = '*';
-                    Map.Grid[Y, X] = '-';
+                    Map.Grid[Y, X] = '·';
 
                     X = newX;
                     Y = newY;
@@ -64,6 +57,7 @@ namespace maze_game_c_
                     if (monster != null && !monster.IsDefeated)
                     {
                         Console.Clear();
+                        Console.ResetColor();
                         Console.WriteLine(monster.CurrentQuestion);
 
                         int answer;
@@ -83,21 +77,23 @@ namespace maze_game_c_
 
                         if (monster.CheckAnswer(answer))
                         {
+                            Console.ResetColor();
                             Console.WriteLine("Victory!");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey(true);
                             Console.Clear();
                             Map.Monsters.Remove(monster);
-                            Map.Grid[newY, newX] = '-';
+                            Map.Grid[newY, newX] = '·';
 
                             Map.Grid[newY, newX] = '*';
-                            Map.Grid[Y, X] = '-';
+                            Map.Grid[Y, X] = '·';
                             X = newX;
                             Y = newY;
                         }
                         else
                         {
                             IsAlive = false;
+                            Console.ResetColor();
                             Console.WriteLine("Defeat");
                             Console.WriteLine("Press any key to return to start...");
                             Console.ReadKey(true);
@@ -109,7 +105,7 @@ namespace maze_game_c_
                     HasWon = true;
 
                     Map.Grid[newY, newX] = '*';
-                    Map.Grid[Y, X] = '-';
+                    Map.Grid[Y, X] = '·';
 
                     X = newX;
                     Y = newY;

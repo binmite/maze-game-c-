@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace maze_game_c_
+﻿namespace maze_game_c_
 {
     internal class ActionPanel
     {
@@ -81,6 +75,7 @@ namespace maze_game_c_
 
                 if (player.HasWon == true)
                 {
+                    Console.ResetColor();
                     VictoryScreen();
                     break;
                 }
